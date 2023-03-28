@@ -15,6 +15,7 @@ export const ProductDetailScreen = () => {
   const { width } = useWindowDimensions();
 
   const addToCart = () => {
+    console.warn("added")
   }
 
   return (
@@ -30,16 +31,17 @@ export const ProductDetailScreen = () => {
           pagingEnabled
         />
 
-        <View style={{ padding: 20 }}>
+        <View style={{ padding: 20, paddingBottom: 90 }}>
           <Text style={styles.title}>{product.name}</Text>
           <Text style={styles.price}>${product.price}</Text>
           <Text style={styles.description}>{product.description}</Text>
         </View>
       </ScrollView>
 
-      <Pressable onPress={addToCart} style={styles.button}>
+      <Pressable  onPress={addToCart} style={styles.button}>
         <Text style={styles.buttonText}>Add to Chart</Text>
       </Pressable>
+
     </View>
   );
 };
