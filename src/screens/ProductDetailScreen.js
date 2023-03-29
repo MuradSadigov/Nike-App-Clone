@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   View,
   StyleSheet,
@@ -7,19 +8,39 @@ import {
   Text,
   useWindowDimensions,
   Pressable,
+  Modal,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCartItem } from "../store/cartSlice";
+import { useState } from "react";
 
 export const ProductDetailScreen = () => {
+  const navigation = useNavigation();
   const product = useSelector((state) => state.products.selectedProduct);
+  const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
   const { width } = useWindowDimensions();
 
   const addToCart = () => {
-    console.warn("added");
+    dispatch(addCartItem({ product }));
+    setModalVisible(true);
+    setTimeout(() => navigation.navigate("Products"), 1500);
   };
 
   return (
     <View>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Image
+              style={{ width: 100, height: 100 }}
+              source={require("../../assets/check-green.gif")}
+            />
+            <Text style={styles.modalText}>Added to the Cart</Text>
+          </View>
+        </View>
+      </Modal>
+
       <ScrollView>
         <FlatList
           data={product.images}
@@ -76,5 +97,30 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "500",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    fontSize: 20,
+    textAlign: "center",
   },
 });

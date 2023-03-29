@@ -1,27 +1,27 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
-// import { useDispatch } from 'react-redux';
-// import { cartSlice } from '../store/cartSlice';
+import { useDispatch } from "react-redux";
+import { changeQuantity } from "../store/cartSlice";
 
 const CartListItem = ({ cartItem }) => {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const increaseQuantity = () => {
-    // dispatch(
-    //   cartSlice.actions.changeQuantity({
-    //     productId: cartItem.product._id,
-    //     amount: 1,
-    //   })
-    // );
+    dispatch(
+      changeQuantity({
+        productId: cartItem.product.id,
+        amount: 1,
+      })
+    );
   };
 
   const decreaseQuantity = () => {
-    // dispatch(
-    //   cartSlice.actions.changeQuantity({
-    //     productId: cartItem.product._id,
-    //     amount: -1,
-    //   })
-    // );
+    dispatch(
+      changeQuantity({
+        productId: cartItem.product.id,
+        amount: -1,
+      })
+    );
   };
 
   return (
@@ -33,19 +33,13 @@ const CartListItem = ({ cartItem }) => {
         <Text style={styles.size}>Size {cartItem.size}</Text>
 
         <View style={styles.footer}>
-          <Feather
-            onPress={decreaseQuantity}
-            name="minus-circle"
-            size={24}
-            color="gray"
-          />
+          <TouchableOpacity onPress={decreaseQuantity}>
+            <Feather name="minus-circle" size={24} color="gray" />
+          </TouchableOpacity>
           <Text style={styles.quantity}>{cartItem.quantity}</Text>
-          <Feather
-            onPress={increaseQuantity}
-            name="plus-circle"
-            size={24}
-            color="gray"
-          />
+          <TouchableOpacity onPress={increaseQuantity}>
+            <Feather name="plus-circle" size={24} color="gray" />
+          </TouchableOpacity>
           <Text style={styles.itemTotal}>
             $ {cartItem.product.price * cartItem.quantity}
           </Text>
