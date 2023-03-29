@@ -1,6 +1,6 @@
 # Nike-App-Clone
 React-Native &amp; Redux
-![Project Screenshots](https://github.com/MuradSadigov/Nike-App-Clone/blob/main/assets/Screenshot_1680127791.png)
+<img src="https://github.com/MuradSadigov/Nike-App-Clone/blob/main/assets/Screenshot_1680127791.png" alt="alt text" width="500" height="300">
 <h3 align="center">A passionate mobile and web developer.</h3>
 
 - 👨‍💻 All of my projects are available at [https://github.com/MuradSadigov](https://github.com/MuradSadigov)
