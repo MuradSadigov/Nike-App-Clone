@@ -8,15 +8,15 @@ import {
   useWindowDimensions,
   Pressable,
 } from "react-native";
-import products from "../data/products";
+import { useSelector } from "react-redux";
 
 export const ProductDetailScreen = () => {
-  const product = products[0];
+  const product = useSelector((state) => state.products.selectedProduct);
   const { width } = useWindowDimensions();
 
   const addToCart = () => {
-    console.warn("added")
-  }
+    console.warn("added");
+  };
 
   return (
     <View>
@@ -38,10 +38,9 @@ export const ProductDetailScreen = () => {
         </View>
       </ScrollView>
 
-      <Pressable  onPress={addToCart} style={styles.button}>
+      <Pressable onPress={addToCart} style={styles.button}>
         <Text style={styles.buttonText}>Add to Chart</Text>
       </Pressable>
-
     </View>
   );
 };

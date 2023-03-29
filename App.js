@@ -4,18 +4,22 @@ import { ProductsScreen } from "./src/screens/ProductsScreen";
 import { ProductDetailScreen } from "./src/screens/ProductDetailScreen";
 import { ShoppingCart } from "./src/screens/ShoppingCart";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import Navigation from "./src/Navigation";
+import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import store from "./src/store";
 
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={styles.container}>
-        {/* <ProductsScreen /> */}
-        {/* <ProductDetailScreen /> */}
-        <ShoppingCart />
+    <Provider store={store}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Navigation />
 
-        <StatusBar style="auto" />
-      </SafeAreaView>
-    </SafeAreaProvider>
+          <StatusBar style="auto" />
+        </View>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
